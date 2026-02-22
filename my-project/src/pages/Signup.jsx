@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Mail, Lock, Eye, EyeOff } from 'lucide-react';
+import { signupUser } from '../services/chatAPI';
 import lunexLogo from '../assets/lunex-logo.svg';
 
 const Signup = () => {
@@ -89,30 +90,15 @@ const Signup = () => {
     setLoading(true);
 
     try {
-      const response = await fetch('http://127.0.0.1:8000/signup', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: formData.email,
-          password: formData.password
-        }),
-      });
+      const data = await signupUser(formData.email, formData.password)
 
-      const data = await response.json();
-
-      if (response.ok) {
-        console.log('Signup successful:', data);
-        navigate('/login');
-      } else {
-        setError(data.detail || 'Signup failed. Please try again.');
-      }
+      console.log('Signup successful:', data)
+      navigate('/login')
     } catch (err) {
-      console.error('Signup error:', err);
-      setError('An error occurred. Please try again later.');
+      console.error('Signup error:', err)
+      setError(err.message || 'An error occurred. Please try again later.')
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
   };
 

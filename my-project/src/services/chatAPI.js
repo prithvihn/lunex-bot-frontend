@@ -1,11 +1,13 @@
 import axios from 'axios'
 
 const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000'
+console.log('🔗 API connecting to:', BASE_URL)
 
 const api = axios.create({
     baseURL: BASE_URL,
     withCredentials: true,
     headers: { 'Content-Type': 'application/json' },
+    timeout: 30000,
 })
 
 // JWT auth interceptor — attach token to every request
@@ -17,6 +19,23 @@ api.interceptors.request.use((config) => {
     }
     return config
 })
+
+// ─── Authentication ──────────────────────────────────────
+
+export async function loginUser(email, password) {
+    const { data } = await api.post('/login', { email, password })
+    return data
+}
+
+export async function signupUser(email, password) {
+    const { data } = await api.post('/signup', { email, password })
+    return data
+}
+
+export async function registerUser(email, password) {
+    const { data } = await api.post('/register', { email, password })
+    return data
+}
 
 // ─── Conversations ───────────────────────────────────────
 

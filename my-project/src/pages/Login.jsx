@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Mail, Lock, Eye, EyeOff, LogIn } from 'lucide-react'
+import { loginUser } from '../services/chatAPI'
 import lunexLogo from '../assets/lunex-logo.svg'
 
 const Login = ({ onLogin }) => {
@@ -96,37 +97,24 @@ const Login = ({ onLogin }) => {
     setIsLoading(true)
 
     try {
-      const response = await fetch('http://127.0.0.1:8000/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: form.email,
-          password: form.password
-        }),
-      });
+      const data = await loginUser(form.email, form.password)
 
-      const data = await response.json();
+      // Store tokens
+      localStorage.setItem('access_token', data.access_token)
+      localStorage.setItem('refresh_token', data.refresh_token)
+      localStorage.setItem('token_type', data.token_type)
+      localStorage.setItem('user_email', form.email)
 
-      if (response.ok) {
-        localStorage.setItem('access_token', data.access_token);
-        localStorage.setItem('refresh_token', data.refresh_token);
-        localStorage.setItem('token_type', data.token_type);
-        localStorage.setItem('user_email', form.email);
-
-        console.log('Login successful');
-        if (typeof onLogin === 'function') {
-          onLogin();
-        }
-
-        navigate('/');
-      } else {
-        setErrors({ server: data.detail || 'Invalid credentials' });
-        triggerShake('password');
+      console.log('Login successful')
+      if (typeof onLogin === 'function') {
+        onLogin()
       }
+
+      navigate('/')
     } catch (error) {
-      setErrors({ server: 'Backend server is not responding.' });
+      console.error('Login error:', error)
+      setErrors({ server: error.message || 'Backend server is not responding.' })
+      triggerShake('password')
     } finally {
       setIsLoading(false)
     }
