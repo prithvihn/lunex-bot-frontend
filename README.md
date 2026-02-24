@@ -136,23 +136,23 @@ lunex-bot-frontend/
 
 **🪐 Landing Page**
 
-![Landing Page](assets/landing-page.png)
+![Landing Page](my-project/assets/landing-page.png)
 
 **💬 Chat — Input, Output & Replies**
 
-![Chat Interface](assets/input-output-reply.png)
+![Chat Interface](my-project/assets/input-output-reply.png)
 
 **🔍 Chat History, Search & New Chat**
 
-![Chat History](assets/chat-history-search-new-chat.png)
+![Chat History](my-project/assets/chat-history-search-new-chat.png)
 
 **🗑️ Delete Conversation**
 
-![Delete Conversation](assets/delete-conversation.png)
+![Delete Conversation](my-project/assets/delete-conversation.png)
 
 **🔄 Frontend ↔ Backend Workflow**
 
-![Workflow](assets/workflow-frontend-backend.png)
+![Workflow](my-project/assets/workflow-frontend-backend.png)
 
 ---
 
