@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useMemo, useCallback } from 'react'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
-import { LogIn, Menu, UserPlus, Search, Trash2 } from 'lucide-react'
+import { LogIn, Menu, UserPlus, Search, Trash2, Edit2 } from 'lucide-react'
 import lunexLogo from './assets/lunex-logo.svg'
 import './App.css'
 import Home from './pages/home'
@@ -12,7 +12,9 @@ import {
   getConversations,
   createConversation,
   deleteConversation as deleteConversationAPI,
+  renameConversation,
 } from './services/chatAPI'
+import RenameModal from './components/RenameModal'
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(
@@ -23,6 +25,8 @@ function App() {
   const [loadingConversations, setLoadingConversations] = useState(false)
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
+  const [renameModalOpen, setRenameModalOpen] = useState(false)
+  const [chatToRename, setChatToRename] = useState(null)
 
   const filteredConversations = useMemo(() => {
     if (!searchQuery.trim()) return conversations
@@ -100,6 +104,26 @@ function App() {
     } catch (err) {
       console.error('Failed to delete conversation:', err)
       alert('Failed to delete conversation. Please try again.')
+    }
+  }
+
+  const handleRenameChat = (e, convId, title) => {
+    e.stopPropagation()
+    setChatToRename({ id: convId, title })
+    setRenameModalOpen(true)
+  }
+
+  const handleRenameSubmit = async (newTitle) => {
+    try {
+      await renameConversation(chatToRename.id, newTitle)
+      setConversations((prev) =>
+        prev.map((c) =>
+          c.id === chatToRename.id ? { ...c, title: newTitle } : c,
+        ),
+      )
+    } catch (err) {
+      console.error('Failed to rename conversation:', err)
+      alert('Failed to rename conversation. Please try again.')
     }
   }
 
@@ -454,14 +478,24 @@ function App() {
                         >
                           {conv.title}
                         </button>
-                        <button
-                          type="button"
-                          onClick={(e) => handleDeleteConversation(e, conv.id)}
-                          className="sidebar-delete-btn"
-                          title="Delete conversation"
-                        >
-                          <Trash2 size={14} />
-                        </button>
+                        <div className="sidebar-conv-actions">
+                          <button
+                            type="button"
+                            onClick={(e) => handleRenameChat(e, conv.id, conv.title)}
+                            className="sidebar-rename-btn"
+                            title="Rename conversation"
+                          >
+                            <Edit2 size={14} />
+                          </button>
+                          <button
+                            type="button"
+                            onClick={(e) => handleDeleteConversation(e, conv.id)}
+                            className="sidebar-delete-btn"
+                            title="Delete conversation"
+                          >
+                            <Trash2 size={14} />
+                          </button>
+                        </div>
                       </div>
                     )
                   })}
@@ -526,6 +560,13 @@ function App() {
         <Route path="/login" element={<Login onLogin={handleLogin} />} />
         <Route path="/signup" element={<Signup />} />
       </Routes>
+
+      <RenameModal
+        isOpen={renameModalOpen}
+        onClose={() => setRenameModalOpen(false)}
+        currentTitle={chatToRename?.title || ''}
+        onRename={handleRenameSubmit}
+      />
     </Router>
   )
 }
