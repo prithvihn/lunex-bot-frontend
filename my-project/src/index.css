@@ -859,6 +859,123 @@ input:focus-visible {
   background: rgba(239, 68, 68, 0.15) !important;
 }
 
+/* ===== Voice Input ===== */
+.voice-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 9999px;
+  border: none;
+  background: transparent;
+  color: #94a3b8;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.voice-button:hover {
+  background-color: #334155;
+  color: #e2e8f0;
+  transform: translateY(-2px);
+}
+
+.voice-button.listening {
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.15);
+}
+
+.voice-button.listening:hover {
+  background: rgba(239, 68, 68, 0.25);
+}
+
+/* Pulse animation for active recording */
+.pulse-animation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 0.75;
+  }
+}
+
+/* Recording indicator banner */
+.recording-indicator {
+  position: fixed;
+  top: 5rem;
+  right: 1.25rem;
+  background: rgba(239, 68, 68, 0.92);
+  color: white;
+  padding: 0.65rem 1.25rem;
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(10px);
+  z-index: 100;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-16px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.recording-dot {
+  width: 8px;
+  height: 8px;
+  background: white;
+  border-radius: 50%;
+  animation: blink 1s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}
+
+/* Interim transcript preview */
+.interim-transcript {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.85rem;
+  margin-top: 0.5rem;
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.55);
+  background: rgba(59, 130, 246, 0.06);
+  border-radius: 0.6rem;
+  border-left: 3px solid rgba(59, 130, 246, 0.45);
+}
+
+.interim-transcript em {
+  color: rgba(255, 255, 255, 0.7);
+}
+
 /* ===== Responsive Layout ===== */
 @media (max-width: 1024px) {
   .home-search-shell {

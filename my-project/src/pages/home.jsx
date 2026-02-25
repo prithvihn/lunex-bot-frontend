@@ -1,5 +1,6 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState, useCallback } from 'react'
 import { ArrowUpRight, Plus } from 'lucide-react'
+import VoiceInput from '../components/VoiceInput'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import {
@@ -26,7 +27,10 @@ const Home = ({
   const [messagesLoading, setMessagesLoading] = useState(false)
   const [error, setError] = useState('')
   const [messages, setMessages] = useState([])
+  const [interimTranscript, setInterimTranscript] = useState('')
+  const [isVoiceActive, setIsVoiceActive] = useState(false)
   const messagesEndRef = useRef(null)
+  const voiceButtonRef = useRef(null)
 
   const hasMessages = messages.length > 0
 
@@ -157,8 +161,41 @@ const Home = ({
     }
   }
 
+  // Voice input handler
+  const handleVoiceTranscript = useCallback((transcript, isFinal = true) => {
+    if (isFinal) {
+      setInput((prev) => {
+        const newMessage = prev + (prev ? ' ' : '') + transcript
+        return newMessage
+      })
+      setInterimTranscript('')
+    } else {
+      setInterimTranscript(transcript)
+    }
+  }, [])
+
+  // Ctrl+M keyboard shortcut for voice input
+  useEffect(() => {
+    const handleGlobalKeyDown = (e) => {
+      if (e.ctrlKey && e.key === 'm') {
+        e.preventDefault()
+        voiceButtonRef.current?.click()
+      }
+    }
+    window.addEventListener('keydown', handleGlobalKeyDown)
+    return () => window.removeEventListener('keydown', handleGlobalKeyDown)
+  }, [])
+
   return (
     <div className="gradient-bg relative min-h-screen w-full overflow-hidden flex flex-col" style={{ position: 'relative' }}>
+      {/* Recording indicator */}
+      {isVoiceActive && (
+        <div className="recording-indicator">
+          <div className="recording-dot" />
+          <span>Recording...</span>
+        </div>
+      )}
+
       {/* Planet horizon (background layer) */}
       <div
         className="pointer-events-none absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-[80%]
@@ -292,6 +329,13 @@ const Home = ({
                   disabled={isLoading}
                 />
 
+                <span ref={voiceButtonRef} style={{ display: 'inline-flex' }}>
+                  <VoiceInput
+                    onTranscript={handleVoiceTranscript}
+                    onListeningChange={setIsVoiceActive}
+                  />
+                </span>
+
                 <button
                   onClick={handleSend}
                   disabled={!input.trim() || isLoading}
@@ -305,6 +349,13 @@ const Home = ({
                   )}
                 </button>
               </div>
+
+              {interimTranscript && (
+                <div className="interim-transcript">
+                  <span className="loader-spinner" style={{ width: '0.85rem', height: '0.85rem' }} />
+                  Listening: <em>{interimTranscript}</em>
+                </div>
+              )}
             </div>
           </div>
 
