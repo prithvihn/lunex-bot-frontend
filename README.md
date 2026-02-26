@@ -5,15 +5,16 @@
 ```
  ██╗     ██╗   ██╗███╗   ██╗███████╗██╗  ██╗
  ██║     ██║   ██║████╗  ██║██╔════╝╚██╗██╔╝
- ██║     ██║   ██║██╔██╗ ██║█████╗   ╚███╔╝ 
- ██║     ██║   ██║██║╚██╗██║██╔══╝   ██╔██╗ 
+ ██║     ██║   ██║██╔██╗ ██║█████╗   ╚███╔╝
+ ██║     ██║   ██║██║╚██╗██║██╔══╝   ██╔██╗
  ███████╗╚██████╔╝██║ ╚████║███████╗██╔╝ ██╗
  ╚══════╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝
 ```
 
-### 🌌 *Your AI Guide Through the Cosmos*
+### 🌌 _Your AI Guide Through the Cosmos_
 
 ---
+
 [![Live Demo](https://img.shields.io/badge/🚀_Live_Demo-eega--ai.vercel.app-FF3B3B?style=for-the-badge)](https://lunexbot.vercel.app)
 [![React](https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://reactjs.org/)
 [![Vite](https://img.shields.io/badge/Vite-Latest-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
@@ -26,7 +27,7 @@
 
 ## 🚀 What is Lunex?
 
-> *"Lunex" — from "Luna" (Moon) + "X" (the unknown) — a gateway to infinite space-driven knowledge.*
+> _"Lunex" — from "Luna" (Moon) + "X" (the unknown) — a gateway to infinite space-driven knowledge._
 
 **Lunex** is a sleek, space-themed AI chatbot frontend that connects humans to the cosmos through conversation. Whether you're curious about black holes, stellar formations, or just need guidance navigating the universe of knowledge — Lunex is your intelligent co-pilot.
 
@@ -36,15 +37,17 @@ This repository contains the **React-powered frontend** of the Lunex chatbot pla
 
 ## 🌠 Feature Highlights
 
-| Feature | Description |
-|---|---|
-| 💬 **AI Chat Interface** | Real-time conversational experience powered by backend AI |
-| 📜 **Chat History** | Browse, search, and revisit past conversations |
-| 🗑️ **Delete Conversations** | Manage your chat history with ease |
-| 🔐 **Auth Flow** | Secure Login & Signup pages for personalized sessions |
-| 📡 **API Integration** | Dedicated service layer (`chatAPI.js`) for clean backend communication |
-| 📱 **Responsive Design** | Works seamlessly across devices |
-| 🌑 **Space Aesthetic** | UI designed to feel like you're exploring the universe |
+| Feature                     | Description                                                            |
+| --------------------------- | ---------------------------------------------------------------------- |
+| 💬 **AI Chat Interface**    | Real-time conversational experience powered by backend AI              |
+| 🎙️ **Voice Input**          | Dictate messages using speech recognition for hands-free interaction   |
+| ✏️ **Rename Chat**          | Rename conversations in the sidebar for better organization            |
+| 📜 **Chat History**         | Browse, search, and revisit past conversations                         |
+| 🗑️ **Delete Conversations** | Manage your chat history with ease                                     |
+| 🔐 **Auth Flow**            | Secure Login & Signup pages for personalized sessions                  |
+| 📡 **API Integration**      | Dedicated service layer (`chatAPI.js`) for clean backend communication |
+| 📱 **Responsive Design**    | Works seamlessly across devices                                        |
+| 🌑 **Space Aesthetic**      | UI designed to feel like you're exploring the universe                 |
 
 ---
 
@@ -75,14 +78,14 @@ This repository contains the **React-powered frontend** of the Lunex chatbot pla
 
 ## 🪐 Tech Stack
 
-| Layer | Technology |
-|---|---|
-| **Framework** | React 18 |
-| **Build Tool** | Vite |
-| **Routing** | React Router DOM |
+| Layer           | Technology                           |
+| --------------- | ------------------------------------ |
+| **Framework**   | React 18                             |
+| **Build Tool**  | Vite                                 |
+| **Routing**     | React Router DOM                     |
 | **HTTP Client** | Fetch API / Axios (via `chatAPI.js`) |
-| **Styling** | CSS Modules + Custom CSS |
-| **Linting** | ESLint |
+| **Styling**     | CSS Modules + Custom CSS             |
+| **Linting**     | ESLint                               |
 
 ---
 
@@ -214,13 +217,13 @@ const BASE_URL = "http://localhost:8000"; // 🔁 Replace with your backend URL
 
 ## 🌌 Pages Overview
 
-| Route | Component | Description |
-|---|---|---|
-| `/` | `home.jsx` | Main landing & chat interface |
-| `/login` | `Login.jsx` | User login screen |
-| `/signup` | `Signup.jsx` | New user registration |
-| `/about` | `About.jsx` | About Lunex & its mission |
-| `/contact` | `Contact.jsx` | Get in touch / support |
+| Route      | Component     | Description                   |
+| ---------- | ------------- | ----------------------------- |
+| `/`        | `home.jsx`    | Main landing & chat interface |
+| `/login`   | `Login.jsx`   | User login screen             |
+| `/signup`  | `Signup.jsx`  | New user registration         |
+| `/about`   | `About.jsx`   | About Lunex & its mission     |
+| `/contact` | `Contact.jsx` | Get in touch / support        |
 
 ---
 
@@ -228,7 +231,6 @@ const BASE_URL = "http://localhost:8000"; // 🔁 Replace with your backend URL
 
 - [ ] 🌗 **Dark / Light Mode Toggle** — Switch between themes
 - [ ] 🌍 **Multi-language Support** — Interact with Lunex in any language
-- [ ] 🎙️ **Voice Input** — Ask Lunex questions with your voice
 - [ ] 🧠 **Memory Mode** — Lunex remembers your preferences across sessions
 - [ ] 📊 **Chat Analytics** — Visualize your conversation patterns
 - [ ] 🔔 **Notifications** — Get alerts for responses or updates
@@ -246,16 +248,14 @@ Contributions are welcome! If you'd like to help improve Lunex:
 4. Push to the branch (`git push origin feature/your-feature`)
 5. Open a Pull Request
 
-
-
 <div align="center">
 
-### 🌙 *Built with curiosity, powered by AI, inspired by the cosmos.*
+### 🌙 _Built with curiosity, powered by AI, inspired by the cosmos._
 
 **[⭐ Star this repo](https://github.com/prithvihn/lunex-bot-frontend)** if Lunex lights up your world!
 
 ---
 
-*Lunex Frontend — Part of the Lunex Chatbot Platform*
+_Lunex Frontend — Part of the Lunex Chatbot Platform_
 
 </div>
